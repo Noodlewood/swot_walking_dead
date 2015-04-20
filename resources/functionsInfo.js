@@ -21,5 +21,4 @@ var functionsInfo = {
         ]
 }]};
 
-
 module.exports = functionsInfo;

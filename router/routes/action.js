@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var db = require('../../resources/db.js');
+var server = require('http').Server(express);
+var io = require('socket.io')(server);
+server.listen(80);
+
 var tokens = require('../../resources/tokens.js');
 var serverCom = require('../../resources/serverCommunication');
+var func = require('../../resources/functionsInfo.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -18,15 +22,11 @@ router.get('/move', function(req, res) {
             err.message = 'You are not permitted to perform this.';
             res.status(403).json(err);
         }else{
-            console.log(arguments);
-            if (req.query.light == "0" || req.query.light == "1") {
-                var light = null;
-                if (req.query.light == "0") light = "off";
-                else light = "on";
+            console.log(req.query)
+            if (req.query.direction == "0" || req.query.direction == "1"
+                || req.query.direction == "2" || req.query.direction == "3") {
 
-                db.setStatus("lamp", light);
-
-                var functionMessage = "Zombie moved " + light;
+                var functionMessage = "Zombie moved ";
                 serverCom.sendMessageToServer(functionMessage);
                 serverCom.sendInfoUpdateNotification();
 
@@ -34,7 +34,7 @@ router.get('/move', function(req, res) {
                     "statusCode": 200,
                     "status": "success",
                     "request": {
-                        "requestedUrl": "http://localhost:3000/action/switch_light",
+                        "requestedUrl": "http://localhost:3000/action/move",
                         "functionName": "move",
                         "params": [
                             {
@@ -50,6 +50,8 @@ router.get('/move', function(req, res) {
                 actionResponse.message = functionMessage;
 
                 res.json(actionResponse);
+
+                io.emit('move', {direction: 0});
             } else {
                 // a wrong parameter was sent
                 var err = new Error();
@@ -59,7 +61,5 @@ router.get('/move', function(req, res) {
             }
         }
 });
-
-
 
 module.exports = router;

@@ -2,7 +2,6 @@ var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var db = require('./db');
 
 var thingFunctions = require('./functionsInfo');
 

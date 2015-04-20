@@ -11,3 +11,4 @@ socket.on('status message', function (status) {
         document.getElementById("lamp").innerHTML = "lamp is on";
     }
 });
+

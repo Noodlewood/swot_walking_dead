@@ -14,10 +14,6 @@ app.use(express.static('public'));
 // otherwise an error is thrown
 app.set('view engine', 'jade');
 
-// intialize the db
-var db = require('./resources/db');
-db.initializeDB();
-
 // add routes to app context
 var router = require('./router')(app);
 
@@ -51,6 +47,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
