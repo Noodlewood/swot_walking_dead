@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var db = require('../../resources/db');
 var tokens = require('../../resources/tokens.js');
 
 /**

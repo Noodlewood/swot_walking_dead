@@ -135,23 +135,10 @@ html
                 zombieImage.addEventListener("load", gameLoop);
                 zombieImage.src = "zombie.png";
 
-                window.addEventListener('keydown', function (e) {
-                    if (37 == e.keyCode) {
-                        zombie.moveLeft();
-                    }
-                    if (38 == e.keyCode) {
-                        zombie.moveUp();
-                    }
-                    if (39 == e.keyCode) {
-                        zombie.moveRight();
-                    }
-                    if (40 == e.keyCode) {
-                        zombie.moveDown();
-                    }
-                });
-                zombie.moveUp();
                 socket.on('move', function (direction) {
-                    console.log(direction)
-                    zombie.moveUp();
+                    if (direction == "up") zombie.moveUp();
+                    if (direction == "down") zombie.moveDown();
+                    if (direction == "left") zombie.moveLeft();
+                    if (direction =="right") zombie.moveRight();
                 });
             }());

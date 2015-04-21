@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var server = require('http').Server(express);
-var io = require('socket.io')(server);
-server.listen(80);
 
 var tokens = require('../../resources/tokens.js');
 var serverCom = require('../../resources/serverCommunication');
@@ -15,20 +12,20 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/move', function(req, res) {
-
         if (req.headers['accesstoken'] != tokens.tokens.owner_token && req.headers['accesstoken'] != tokens.tokens.write_token) {
             var err = new Error();
             err.status = 403;
             err.message = 'You are not permitted to perform this.';
             res.status(403).json(err);
         }else{
-            console.log(req.query)
-            if (req.query.direction == "0" || req.query.direction == "1"
-                || req.query.direction == "2" || req.query.direction == "3") {
+            var choices = func.functions[0].parameters[0].choices;
+            var paramNumber = parseInt(req.query.direction);
+            var direction = choices[paramNumber];
+            if (direction) {
 
-                var functionMessage = "Zombie moved ";
-                serverCom.sendMessageToServer(functionMessage);
-                serverCom.sendInfoUpdateNotification();
+                var functionMessage = "Zombie moved " + direction;
+                //serverCom.sendMessageToServer(functionMessage);
+                //serverCom.sendInfoUpdateNotification();
 
                 var actionResponse = {
                     "statusCode": 200,
@@ -38,7 +35,7 @@ router.get('/move', function(req, res) {
                         "functionName": "move",
                         "params": [
                             {
-                                "name": "move",
+                                "name": "direction",
                                 "type": "Choice",
                                 "choices": [
                                     "up", "down", "left", "right"
@@ -51,7 +48,7 @@ router.get('/move', function(req, res) {
 
                 res.json(actionResponse);
 
-                io.emit('move', {direction: 0});
+                io.emit('move', direction);
             } else {
                 // a wrong parameter was sent
                 var err = new Error();
