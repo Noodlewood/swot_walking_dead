@@ -19,11 +19,12 @@ router.get('/move', function(req, res) {
             res.status(403).json(err);
         }else{
             var choices = func.functions[0].parameters[0].choices;
-            var paramNumber = parseInt(req.query.direction);
-            var direction = choices[paramNumber];
-            if (direction) {
+            var paramName = func.functions[0].parameters[0].name;
+            var paramNumber = parseInt(req.query[paramName]);
+            var choice = choices[paramNumber];
+            if (choice) {
 
-                var functionMessage = "Zombie moved " + direction;
+                var functionMessage = "Zombie moved " + choice;
                 //serverCom.sendMessageToServer(functionMessage);
                 //serverCom.sendInfoUpdateNotification();
 
@@ -33,22 +34,14 @@ router.get('/move', function(req, res) {
                     "request": {
                         "requestedUrl": "http://localhost:3000/action/move",
                         "functionName": "move",
-                        "params": [
-                            {
-                                "name": "direction",
-                                "type": "Choice",
-                                "choices": [
-                                    "up", "down", "left", "right"
-                                ],
-                                "required": true
-                            }]
+                        "params": func.functions[0].parameters[0]
                     }
                 };
                 actionResponse.message = functionMessage;
 
                 res.json(actionResponse);
 
-                io.emit('move', direction);
+                io.emit('move', choice);
             } else {
                 // a wrong parameter was sent
                 var err = new Error();

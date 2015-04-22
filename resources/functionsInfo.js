@@ -1,11 +1,11 @@
 var functionsInfo = {
     "functions": [{
-        "name": "The Walking Dead",
+        "name": "Move",
         "url": "http://localhost:3000/action/move",
         "available": true,
         "parameters": [
             {
-                "name": "move",
+                "name": "direction",
                 "type": "Choice",
                 "choices": [
                     "up", "down", "left", "right"

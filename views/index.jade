@@ -8,8 +8,6 @@ html
         //- extends layout
         script
             include ../resources/extlibs/socket.io.js
-        script
-            include ../resources/socketio.js
     body
     block content
         <canvas id="canvas"></canvas>
@@ -49,7 +47,7 @@ html
                         zombieImage,
                         canvas;
 
-                var stepSize = 100;
+                var stepSize = 80;
 
                 function gameLoop() {
                     window.requestAnimationFrame(gameLoop);
@@ -118,8 +116,8 @@ html
                 }
                             // Get canvas
                 canvas = document.getElementById("canvas");
-                canvas.width = 600;
-                canvas.height = 600;
+                canvas.width = 1800;
+                canvas.height = 800;
                             // Create sprite sheet
                 zombieImage = new Image();
                             // Create sprite
@@ -135,6 +133,7 @@ html
                 zombieImage.addEventListener("load", gameLoop);
                 zombieImage.src = "zombie.png";
 
+                var socket = io.connect('http://localhost');
                 socket.on('move', function (direction) {
                     if (direction == "up") zombie.moveUp();
                     if (direction == "down") zombie.moveDown();
