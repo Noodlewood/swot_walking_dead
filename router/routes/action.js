@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-
 var tokens = require('../../resources/tokens.js');
 var serverCom = require('../../resources/serverCommunication');
 var func = require('../../resources/functionsInfo.js');
