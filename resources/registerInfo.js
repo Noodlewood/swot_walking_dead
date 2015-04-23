@@ -2,14 +2,11 @@ var tokens = require('./tokens.js');
 
 var registerInfo = {
     "device": {
-        "id": "The Walking Dead",
-        "classification": "Videogame",
-        "url": "http://localhost:3000",
+        "name": "The Walking Dead",
+        "description": "Move the mindless Zombie around! It´s fun!",
+        "profileimage": "http://localhost:3000/downloads/prototype_profile.jpg",
         "api": {
-            "deregister": "http://localhost:3000/deregister",
-            "function": "http://localhost:3000/functions",
-            "status": "http://localhost:3000/status",
-            "profileimage": "http://localhost:3000/downloads/prototype_profile.jpg"
+            "url": "http://localhost:3000"
         }
     }};
 

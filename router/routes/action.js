@@ -25,17 +25,12 @@ router.get('/move', function(req, res) {
             if (choice) {
 
                 var functionMessage = "Zombie moved " + choice;
-                //serverCom.sendMessageToServer(functionMessage);
-                //serverCom.sendInfoUpdateNotification();
+                serverCom.sendMessageToServer(functionMessage);
+                serverCom.sendInfoUpdateNotification();
 
                 var actionResponse = {
                     "statusCode": 200,
-                    "status": "success",
-                    "request": {
-                        "requestedUrl": "http://localhost:3000/action/move",
-                        "functionName": "move",
-                        "params": func.functions[0].parameters[0]
-                    }
+                    "status": "success"
                 };
                 actionResponse.message = functionMessage;
 
