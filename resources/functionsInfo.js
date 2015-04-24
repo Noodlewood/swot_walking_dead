@@ -1,7 +1,7 @@
 var functionsInfo = {
     "functions": [{
         "name": "Move",
-        "url": "http://localhost:3000/action/move",
+        "url": baseUrl + "/action/move",
         "available": true,
         "parameters": [
             {
