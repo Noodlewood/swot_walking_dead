@@ -130,7 +130,7 @@ html
                 zombieImage.addEventListener("load", gameLoop);
                 zombieImage.src = "zombie.png";
 
-                var socket = io.connect('http://localhost');
+                var socket = io.connect('http://localhost:83');
                 socket.on('move', function (direction) {
                     if (direction == "up") zombie.moveUp();
                     if (direction == "down") zombie.moveDown();
