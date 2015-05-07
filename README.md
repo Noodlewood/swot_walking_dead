@@ -1,4 +1,5 @@
 # SWOT Thing prototype
+## SWOT Walking Dead
 
 ### Installation:
 npm must be installed
@@ -6,9 +7,9 @@ npm must be installed
 In Project dir: `$ npm install`
 
 To start the project: 
-`$ set DEBUG=swot_thing & nodemon ./bin/www`
+`$ npm start`
 
-Then the protoype is available under `localhost:3000`
+Then the protoype is available under `localhost:3003`
 
-If you are using XAMPP or similar tools: Make sure the Port 80 is free to use, because of socket-io listens on it. 
+If you are using XAMPP or similar tools: Make sure the Port 83 is free to use, because of socket-io listens on it. 
 
