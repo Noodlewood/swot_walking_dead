@@ -130,6 +130,8 @@ html
                 zombieImage.addEventListener("load", gameLoop);
                 zombieImage.src = "zombie.png";
 
+                // For usage with XAMPP use localhost, e.g. :
+                // http://localhost:83
                 var socket = io.connect('http://13.13.13.17:83');
                 socket.on('move', function (direction) {
                     if (direction == "up") zombie.moveUp();
